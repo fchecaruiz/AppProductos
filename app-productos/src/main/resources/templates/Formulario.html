@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario Creacion de Producto</title>
+</head>
+<body>
+    <h1>Nuevo producto</h1>
+    <form th:action="@{/formulario}" method="post">
+        Nombre: <input type="text" name="nombre" placeholder="Introduce nombre del producto"/><br/>
+        Precio: <input type="number" name="precio" step="0.01" placeholder="Introduce precio del producto"/><br/>
+        <button type="submit">Guardar</button>
+    </form>
+</body>
+</html>
