@@ -5,13 +5,111 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+    <div id="confirmacion-eliminar" class="toast">
+        <p>¿Estás seguro de que quieres eliminar este producto?</p>
+        <button id="btn-confirmar-eliminar-individual">Confirmar</button>
+        <button id="btn-cancelar-eliminar-individual">Cancelar</button>
+    </div>
+
+    <div id="confirmacion-vaciar-carrito" class="toast">
+        <p>Se van a eliminar todos los productos de la cesta.<br>¿Estás seguro?</p>
+        <button id="btn-confirmar-vaciar">Confirmar</button>
+        <button id="btn-cancelar-vaciar">Cancelar</button>
+    </div>
+
     <h1>Productos</h1>
-    
-    <a th:href="@{/formulario}">
-       <button>Crear Nuevo Producto</button>
-    </a>
+
+    <div class="acciones-productos">
+       <a th:href="@{/formulario}">
+          <button>Crear Nuevo Producto</button>
+       </a>
+    </div>
+
     <ul>
-        <li th:each="p : ${productos}" th:text="${p.nombre} + ' - ' + ${p.precio}"></li>
+        <li th:each="p : ${productos}">
+            <span th:text="${p.nombre} + ' - ' + ${p.precio}" class="truncate-text"></span>
+            <div class="lista-productos-acciones">
+                <form th:action="@{/carrito/agregar/{id}(id=${p.id})}" th:method="post">
+                    <button type="submit">Añadir al carrito</button>
+                </form>
+                <a th:href="@{/eliminar/{id}(id=${p.id})}" class="eliminar-producto-link">
+                    <img src="https://img.icons8.com/material-outlined/24/000000/filled-trash.png" alt="Eliminar" class="icono-accion">
+                </a>
+                <a th:href="@{/editar/{id}(id=${p.id})}">
+                    <img src="https://img.icons8.com/material-outlined/24/000000/pencil.png" alt="Editar" class="icono-accion">
+                </a>
+            </div>
+        </li>
     </ul>
+
+    <div class="carrito-container">
+        <h2>Tu Carrito <img src="https://img.icons8.com/material-outlined/75/000000/shopping-cart.png" alt="Icono de carrito de compras" class="icono-carrito"></h2>
+        <div th:if="${carrito != null and not carrito.items.empty}">
+            <ul>
+                <li th:each="item : ${carrito.items}">
+                    <span th:text="${item.nombre} + ' - ' + ${item.precio}" class="truncate-text"></span>
+                    <a th:href="@{/carrito/eliminar/{id}(id=${item.id})}" class="eliminar-carrito-link">
+                        <img src="https://img.icons8.com/material-outlined/24/000000/filled-trash.png" alt="Eliminar del carrito" class="icono-accion">
+                    </a>
+                </li>
+            </ul>
+            <h3>Precio Total: <span th:text="${carrito.precioTotal}"></span></h3>
+        </div>
+        <div th:if="${carrito == null or carrito.items.empty}">
+            <p>El carrito está vacío.</p>
+        </div>
+        <button id="btn-vaciar-carrito">Vaciar Carrito</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toastEliminarProducto = document.getElementById('confirmacion-eliminar');
+            const toastVaciarCarrito = document.getElementById('confirmacion-vaciar-carrito');
+            const btnConfirmarEliminar = document.getElementById('btn-confirmar-eliminar-individual');
+            const btnCancelarEliminar = document.getElementById('btn-cancelar-eliminar-individual');
+            const btnConfirmarVaciar = document.getElementById('btn-confirmar-vaciar');
+            const btnCancelarVaciar = document.getElementById('btn-cancelar-vaciar');
+            const enlacesEliminarProducto = document.querySelectorAll('.eliminar-producto-link');
+            const enlacesEliminarCarrito = document.querySelectorAll('.eliminar-carrito-link');
+            const btnVaciarCarrito = document.getElementById('btn-vaciar-carrito');
+            let urlAccion = '';
+
+            enlacesEliminarProducto.forEach(enlace => {
+                enlace.addEventListener('click', function(event) {
+                    event.preventDefault(); 
+                    urlAccion = enlace.href; 
+                    toastEliminarProducto.classList.add('show');
+                });
+            });
+
+            enlacesEliminarCarrito.forEach(enlace => {
+                enlace.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    urlAccion = enlace.href;
+                    toastEliminarProducto.classList.add('show');
+                });
+            });
+
+            if (btnVaciarCarrito) {
+                btnVaciarCarrito.addEventListener('click', function(event) {
+                    urlAccion = '/carrito/resetear';
+                    toastVaciarCarrito.classList.add('show');
+                });
+            }
+            
+            btnConfirmarEliminar.addEventListener('click', function() {
+                window.location.href = urlAccion;
+            });
+            btnCancelarEliminar.addEventListener('click', function() {
+                toastEliminarProducto.classList.remove('show');
+            });
+            btnConfirmarVaciar.addEventListener('click', function() {
+                window.location.href = urlAccion;
+            });
+            btnCancelarVaciar.addEventListener('click', function() {
+                toastVaciarCarrito.classList.remove('show');
+            });
+        });
+    </script>
 </body>
 </html>

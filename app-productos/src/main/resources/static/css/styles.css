@@ -1,11 +1,12 @@
 /* Estilos globales */
 body {
+    background-color: rgb(199, 244, 250);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to right, #f8f9fa, #e9ecef);
     margin: 0;
-    padding: 2rem;
+    padding:  1rem 400px 1rem 1rem;
     color: #495057;
 }
+
 h1 {
     color: #212529;
     text-align: center;
@@ -48,9 +49,9 @@ form button:hover {
     background-color: #0056b3;
 }
 
-/* Estilos para la lista de productos */
+/* Estilos para la lista de productos y carrito */
 ul {
-    max-width: 500px;
+    max-width: 550px;
     margin: 0 auto;
     list-style-type: none;
     padding: 0;
@@ -71,7 +72,12 @@ a {
     text-decoration: none;
 }
 
-a button {
+.acciones-productos {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.acciones-productos a button {
     padding: 0.5rem 1rem;
     background-color: #28a745;
     color: white;
@@ -80,8 +86,139 @@ a button {
     font-size: 0.9rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin: 5px;
 }
 
-a button:hover {
+.acciones-productos a button:hover {
     background-color: #218838;
+}
+
+.lista-productos-acciones {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.carrito-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.icono-carrito {
+    width: 75px;
+    height: auto;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+.icono-accion {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.truncate-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
+    display: inline-block;
+}
+
+/* Estilos para el Toast de confirmación */
+.toast {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #dc3545;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1001;
+    left: 50%;
+    top: 30px;
+    transform: translate(-50%, 0);
+    font-size: 17px;
+    opacity: 0;
+    transition: opacity 0.5s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.toast p {
+    margin-bottom: 15px;
+}
+
+.toast button {
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#btn-confirmar-eliminar-individual, #btn-confirmar-vaciar {
+    background-color: #007bff;
+    color: white;
+    margin-right: 10px;
+}
+
+#btn-cancelar-eliminar-individual, #btn-cancelar-vaciar {
+    background-color: #28a745;
+    color: white;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Media Query para pantallas pequeñas */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    ul, form {
+        max-width: 100%;
+    }
+
+    li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .lista-productos-acciones {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .acciones-productos {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .carrito-container {
+        position: static; /* CAMBIO CLAVE */
+        width: 100%;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 1rem;
+        padding: 1rem;
+    }
+
+    .truncate-text {
+        max-width: 100%;
+    }
 }
