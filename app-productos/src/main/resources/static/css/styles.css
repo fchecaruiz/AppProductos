@@ -1,10 +1,22 @@
 /* Estilos globales */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background-color: rgb(199, 244, 250);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding:  1rem 400px 1rem 1rem;
     color: #495057;
+}
+
+/* Contenedor para centrar el formulario de login vertical y horizontalmente */
+.login-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
@@ -13,18 +25,15 @@ h1 {
     margin-bottom: 2rem;
 }
 
-/* Estilos para el formulario */
+/* Estilos para formularios en general */
 form {
     max-width: 500px;
     margin: 0 auto;
-    padding: 2rem;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 form input[type="text"],
-form input[type="number"] {
+form input[type="number"],
+form input[type="password"] {
     width: 100%;
     padding: 0.75rem;
     margin-bottom: 1rem;
@@ -221,4 +230,77 @@ a {
     .truncate-text {
         max-width: 100%;
     }
+}
+
+.admin-only {
+    display: none;
+}
+
+/* Estilos para la página de login */
+.login-container {
+    max-width: 400px;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.login-container h2 {
+    color: #212529;
+    margin-bottom: 1.5rem;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-container button:hover {
+    background-color: #218838;
+}
+
+.logout-form {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+}
+
+.logout-form button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.logout-form button:hover {
+    background-color: #d32f2f;
 }

@@ -2,12 +2,14 @@ package com.ejemplo.productos;
 
 import java.util.Optional;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -24,9 +26,24 @@ public class ControladorWeb {
 	private RepositorioProducto repositorioProducto;
 	
 	@GetMapping("/vista")
-	public String mostrarVista(Model modelo) {
+	public String mostrarVista(Model modelo, Authentication authentication) {
 		modelo.addAttribute("productos", servicio.obtenerTodos());
 		modelo.addAttribute("carrito", carrito);
+		
+		if (authentication != null && authentication.getAuthorities().stream()
+				.anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+			modelo.addAttribute("esAdmin", true);
+		} else {
+			modelo.addAttribute("esAdmin", false);
+		}
+
+		if (authentication != null && authentication.getAuthorities().stream()
+				.anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+			modelo.addAttribute("esAdmin", true);
+		} else {
+			modelo.addAttribute("esAdmin", false);
+		}
+
 		return "lista";
 	}
 	
@@ -101,5 +118,19 @@ public class ControladorWeb {
         return "redirect:/vista";
     }
 	
+	@GetMapping("/login")
+    public String showLoginForm() {
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestParam String username, @RequestParam String password) {
+        if ("admin".equals(username) && "admin".equals(password)) {
+            System.out.println("Login exitoso como administrador");
+            return "redirect:/";
+        }
+        return "redirect:/login?error";
+    }
+
 }
 

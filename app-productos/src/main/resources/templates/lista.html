@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security6">
 <head>
     <title>Lista de productos</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+
     <div id="confirmacion-eliminar" class="toast">
         <p>¿Estás seguro de que quieres eliminar este producto?</p>
         <button id="btn-confirmar-eliminar-individual">Confirmar</button>
@@ -19,11 +20,15 @@
 
     <h1>Productos</h1>
 
-    <div class="acciones-productos">
-       <a th:href="@{/formulario}">
-          <button>Crear Nuevo Producto</button>
-       </a>
-    </div>
+<form th:action="@{/logout}" sec:authorize="isAuthenticated()" method="post" class="logout-form">
+    <button type="submit">Cerrar Sesión</button>
+</form>
+
+     <div class="acciones-productos" th:if="${esAdmin}">
+          <a th:href="@{/formulario}">
+            <button>Crear Nuevo Producto</button>
+          </a>
+     </div>
 
     <ul>
         <li th:each="p : ${productos}">
@@ -32,12 +37,12 @@
                 <form th:action="@{/carrito/agregar/{id}(id=${p.id})}" th:method="post">
                     <button type="submit">Añadir al carrito</button>
                 </form>
-                <a th:href="@{/eliminar/{id}(id=${p.id})}" class="eliminar-producto-link">
-                    <img src="https://img.icons8.com/material-outlined/24/000000/filled-trash.png" alt="Eliminar" class="icono-accion">
+                 <a th:href="@{/eliminar/{id}(id=${p.id})}" class="eliminar-producto-link" th:if="${esAdmin}">
+                     <img src="https://img.icons8.com/material-outlined/24/000000/filled-trash.png" alt="Eliminar" class="icono-accion">
                 </a>
-                <a th:href="@{/editar/{id}(id=${p.id})}">
-                    <img src="https://img.icons8.com/material-outlined/24/000000/pencil.png" alt="Editar" class="icono-accion">
-                </a>
+                 <a th:href="@{/editar/{id}(id=${p.id})}" th:if="${esAdmin}">
+                 <img src="https://img.icons8.com/material-outlined/24/000000/pencil.png" alt="Editar" class="icono-accion">
+                    </a>
             </div>
         </li>
     </ul>
@@ -63,6 +68,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Lógica de los toasts de confirmación
             const toastEliminarProducto = document.getElementById('confirmacion-eliminar');
             const toastVaciarCarrito = document.getElementById('confirmacion-vaciar-carrito');
             const btnConfirmarEliminar = document.getElementById('btn-confirmar-eliminar-individual');
