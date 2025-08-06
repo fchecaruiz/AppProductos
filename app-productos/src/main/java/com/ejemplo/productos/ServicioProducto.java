@@ -34,5 +34,12 @@ public class ServicioProducto {
 	public Producto actualizarProducto(Producto producto) {
 	    return repositorio.save(producto);
 	}
+	
+	public List<Producto> obtenerProductosDisponibles() {
+	    // Por ahora, devolveremos una sublista de los productos.
+	    // Más adelante, podemos añadir lógica para filtrar por estado, etc.
+	    List<Producto> todosLosProductos = obtenerTodos();
+	    return todosLosProductos.subList(0, Math.min(3, todosLosProductos.size()));
+	}
 
 }

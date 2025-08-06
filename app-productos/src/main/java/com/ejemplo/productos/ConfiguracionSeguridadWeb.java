@@ -24,7 +24,7 @@ public class ConfiguracionSeguridadWeb {
             )
             .formLogin((form) -> form
             	    .loginPage("/login")
-            	    .defaultSuccessUrl("/vista", true)
+            	    .defaultSuccessUrl("/", true)
             	    .permitAll()
             	
             )

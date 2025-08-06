@@ -1,5 +1,6 @@
 package com.ejemplo.productos;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.security.core.Authentication;
@@ -10,9 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
+@RequestMapping("/")
 public class ControladorWeb {
 
 	
@@ -25,25 +28,21 @@ public class ControladorWeb {
 	@Autowired
 	private RepositorioProducto repositorioProducto;
 	
-	@GetMapping("/vista")
+	@GetMapping("/")
 	public String mostrarVista(Model modelo, Authentication authentication) {
-		modelo.addAttribute("productos", servicio.obtenerTodos());
+		
+		boolean esAdmin = authentication != null && authentication.getAuthorities().stream()
+				.anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+		
+		modelo.addAttribute("esAdmin", esAdmin);
 		modelo.addAttribute("carrito", carrito);
 		
-		if (authentication != null && authentication.getAuthorities().stream()
-				.anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-			modelo.addAttribute("esAdmin", true);
+		if (esAdmin) {
+			modelo.addAttribute("productos", servicio.obtenerTodos());
 		} else {
-			modelo.addAttribute("esAdmin", false);
+			modelo.addAttribute("productos", servicio.obtenerProductosDisponibles());
 		}
-
-		if (authentication != null && authentication.getAuthorities().stream()
-				.anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-			modelo.addAttribute("esAdmin", true);
-		} else {
-			modelo.addAttribute("esAdmin", false);
-		}
-
+		
 		return "lista";
 	}
 	
@@ -58,7 +57,7 @@ public class ControladorWeb {
 	public String guardarDatosFormulario(Producto producto) {
 		servicio.guardarProducto(producto);
 
-		return "redirect:/vista";
+		return "redirect:/";
     }
 	
 	@GetMapping("/formulario")
@@ -73,32 +72,32 @@ public class ControladorWeb {
 	    if (producto.isPresent()) {
 	        carrito.agregarProducto(producto.get());
 	    }
-	    return "redirect:/vista";
+	    return "redirect:/";
 	}
 	
 	@GetMapping("/carrito/resetear")
     public String resetearCarrito() {
         carrito.getItems().clear();
-        return "redirect:/vista";
+        return "redirect:/";
     }
 	
 	@GetMapping("/carrito/eliminar/{id}")
     public String eliminarDelCarrito(@PathVariable Long id) {
         carrito.removeItem(id);
-        return "redirect:/vista";
+        return "redirect:/";
     }
 	
 	
 	@GetMapping("/eliminar/{id}")
     public String eliminarProducto(@PathVariable Long id) {
         repositorioProducto.deleteById(id);
-        return "redirect:/vista";
+        return "redirect:/";
     }
 	
 	@GetMapping("/eliminar-todos")
     public String eliminarTodosLosProductos() {
         repositorioProducto.deleteAll();
-        return "redirect:/vista";
+        return "redirect:/";
     }
 	
 	@GetMapping("/editar/{id}")
@@ -109,13 +108,13 @@ public class ControladorWeb {
             model.addAttribute("producto", producto);
             return "editar";
         }
-        return "redirect:/vista";
+        return "redirect:/";
 	}
 	
 	@PostMapping("/guardar-edicion")
     public String guardarEdicion(Producto producto) {
 		repositorioProducto.save(producto);
-        return "redirect:/vista";
+        return "redirect:/";
     }
 	
 	@GetMapping("/login")
@@ -131,6 +130,4 @@ public class ControladorWeb {
         }
         return "redirect:/login?error";
     }
-
 }
-
