@@ -7,8 +7,8 @@
 <body>
 <h1>Nuevo producto</h1>
 <form th:action="@{/formulario}" method="post">
-Nombre: <input type="text" name="nombre" placeholder="Introduce nombre del producto"/><br/>
-Precio: <input type="number" name="precio" step="0.01" placeholder="Introduce precio del producto"/><br/>
+Nombre: <input type="text" name="nombre" placeholder="Introduce nombre del producto" required /><br/>
+Precio: <input type="number" name="precio" step="0.01" placeholder="Introduce precio del producto" required/><br/>
 <div class="button-container">
     <button type="submit" class="button-guardar">Guardar</button>
     <a th:href="@{/}" class="button-cancelar">Cancelar</a>

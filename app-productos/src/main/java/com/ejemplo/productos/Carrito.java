@@ -5,29 +5,35 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Iterator;
 
 @SessionScope
 @Component
 public class Carrito {
 
     private List<Producto> items = new ArrayList<>();
+    
+    public List<Producto> getItems() { // METODO GET PARA ACCEDER CON THYMELEAF
+        return items;
+    }
 
     public void agregarProducto(Producto producto) {
         this.items.add(producto);
     }
 
-    public void eliminarProducto(Producto producto) {
-        this.items.remove(producto);
-    }
-
-    public List<Producto> getItems() {
-        return items;
+    // Método para eliminar un producto por su id
+    public void eliminarProducto(Long id) {
+        Iterator<Producto> iterator = items.iterator();
+        while (iterator.hasNext()) {
+            Producto p = iterator.next();
+            if (p.getId().equals(id)) {
+                iterator.remove();
+                break;  // salir tras eliminar 1 producto
+            }
+        }
     }
 
     public double getPrecioTotal() {
         return items.stream().mapToDouble(Producto::getPrecio).sum();
-    }
-    public void removeItem(Long id) {
-        items.removeIf(item -> item.getId().equals(id));
     }
 }

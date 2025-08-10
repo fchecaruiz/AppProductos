@@ -13,111 +13,105 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 @Controller
 @RequestMapping("/")
 public class ControladorWeb {
 
-	
-	@Autowired
-	private ServicioProducto servicio;
-	
-	@Autowired
-	private Carrito carrito;
-	
-	@Autowired
-	private RepositorioProducto repositorioProducto;
-	
-	@GetMapping("/")
-	public String mostrarVista(Model modelo, Authentication authentication) {
-		
-		boolean esAdmin = authentication != null && authentication.getAuthorities().stream()
-				.anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
-		
-		modelo.addAttribute("esAdmin", esAdmin);
-		modelo.addAttribute("carrito", carrito);
-		
-		if (esAdmin) {
-			modelo.addAttribute("productos", servicio.obtenerTodos());
-		} else {
-			modelo.addAttribute("productos", servicio.obtenerProductosDisponibles());
-		}
-		
-		return "lista";
-	}
-	
-	@GetMapping("/prueba")
-	public String vistaPrueba() {
-		return "prueba";
-	}
-	
-	// METODO PARA RECIBIR DATOS DEL FORMULARIO
-	
-	@PostMapping("/formulario")
-	public String guardarDatosFormulario(Producto producto) {
-		servicio.guardarProducto(producto);
-
-		return "redirect:/";
+    @Autowired
+    private ServicioProducto servicio;
+    
+    @Autowired
+    private Carrito carrito;
+    
+    @Autowired
+    private RepositorioProducto repositorioProducto;
+    
+    @GetMapping("/")
+    public String mostrarVista(Model modelo, Authentication authentication) {
+        
+        boolean esAdmin = authentication != null && authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+        
+        modelo.addAttribute("esAdmin", esAdmin);
+        modelo.addAttribute("carrito", carrito);
+        
+        if (esAdmin) {
+            modelo.addAttribute("productos", servicio.obtenerTodos());
+        } else {
+            modelo.addAttribute("productos", servicio.obtenerProductosDisponibles());
+        }
+        
+        return "lista";
     }
-	
-	@GetMapping("/formulario")
-	public String mostrarFormulario() {
-		return "formulario";
-	}
-	
-	
-	@PostMapping("/carrito/agregar/{id}")
-	public String agregarAlCarrito(@PathVariable Long id) {
-	    Optional<Producto> producto = servicio.obtenerPorId(id);
-	    if (producto.isPresent()) {
-	        carrito.agregarProducto(producto.get());
-	    }
-	    return "redirect:/";
-	}
-	
-	@GetMapping("/carrito/resetear")
+    
+    @GetMapping("/prueba")
+    public String vistaPrueba() {
+        return "prueba";
+    }
+    
+    // METODO PARA RECIBIR DATOS DEL FORMULARIO
+    @PostMapping("/formulario")
+    public String guardarDatosFormulario(Producto producto) {
+        servicio.guardarProducto(producto);
+        return "redirect:/";
+    }
+    
+    @GetMapping("/formulario")
+    public String mostrarFormulario() {
+        return "formulario";
+    }
+    
+    @PostMapping("/carrito/agregar/{id}")
+    public String agregarAlCarrito(@PathVariable Long id) {
+        Optional<Producto> producto = servicio.obtenerPorId(id);
+        if (producto.isPresent()) {
+            carrito.agregarProducto(producto.get());
+        }
+        return "redirect:/";
+    }
+    
+    @GetMapping("/carrito/resetear")
     public String resetearCarrito() {
         carrito.getItems().clear();
         return "redirect:/";
     }
-	
-	@GetMapping("/carrito/eliminar/{id}")
+    
+    @GetMapping("/carrito/eliminar/{id}")
     public String eliminarDelCarrito(@PathVariable Long id) {
-        carrito.removeItem(id);
+        carrito.eliminarProducto(id);  // <-- aquí debe coincidir con el método en Carrito.java
         return "redirect:/";
     }
-	
-	
-	@GetMapping("/eliminar/{id}")
+    
+    @GetMapping("/eliminar/{id}")
     public String eliminarProducto(@PathVariable Long id) {
         repositorioProducto.deleteById(id);
         return "redirect:/";
     }
-	
-	@GetMapping("/eliminar-todos")
+    
+    @GetMapping("/eliminar-todos")
     public String eliminarTodosLosProductos() {
         repositorioProducto.deleteAll();
         return "redirect:/";
     }
-	
-	@GetMapping("/editar/{id}")
+
+    @GetMapping("/editar/{id}")
     public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
-		Producto producto = repositorioProducto.findById(id).orElse(null);
-		
-		if (producto != null) {
+        Producto producto = repositorioProducto.findById(id).orElse(null);
+        
+        if (producto != null) {
             model.addAttribute("producto", producto);
             return "editar";
         }
         return "redirect:/";
-	}
-	
-	@PostMapping("/guardar-edicion")
+    }
+    
+    @PostMapping("/guardar-edicion")
     public String guardarEdicion(Producto producto) {
-		repositorioProducto.save(producto);
+        repositorioProducto.save(producto);
         return "redirect:/";
     }
-	
-	@GetMapping("/login")
+    
+    @GetMapping("/login")
     public String showLoginForm() {
         return "login";
     }
