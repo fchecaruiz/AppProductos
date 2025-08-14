@@ -111,12 +111,12 @@ public class ControladorWeb {
         return "redirect:/";
     }
     
-    @GetMapping("/login")
+    @GetMapping("/login-admin")
     public String showLoginForm() {
         return "login";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/login-admin")
     public String login(@RequestParam String username, @RequestParam String password) {
         if ("admin".equals(username) && "admin".equals(password)) {
             System.out.println("Login exitoso como administrador");
