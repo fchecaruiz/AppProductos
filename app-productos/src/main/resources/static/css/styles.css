@@ -1,674 +1,363 @@
-
 /* Estilos globales */
 
 html, body {
-
-height: 100%;
-
-margin: 0;
-
-padding: 0;
-
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
-
-
 
 body {
-
-background-color: rgb(199, 244, 250);
-
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-color: #495057;
-
+    background-color: #F0F2F5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
 }
-
-
 
 /* Contenedor para centrar el formulario de login vertical y horizontalmente */
 
 .login-page {
-
-height: 100vh;
-
-display: flex;
-
-justify-content: center;
-
-align-items: center;
-
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
-
 
 h1 {
-
-color: #212529;
-
-text-align: center;
-
-margin-bottom: 2rem;
-
+    color: #212529;
+    text-align: center;
+    margin-bottom: 2rem;
 }
-
-
 
 /* Estilos para formularios en general */
 
 form {
-
-max-width: 500px;
-
-margin: 0 auto;
-
+    max-width: 500px;
+    margin: 0 auto;
 }
-
-
 
 form input[type="text"],
-
 form input[type="number"],
-
 form input[type="password"] {
-
-width: 100%;
-
-padding: 0.75rem;
-
-margin-bottom: 1rem;
-
-border: 1px solid #ced4da;
-
-border-radius: 4px;
-
-box-sizing: border-box;
-
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
-
-
 
 form button {
-
-/* Aquí se eliminó el 'width: 100%;' para evitar conflictos con los nuevos botones */
-
-padding: 0.75rem;
-
-border: none;
-
-background-color: #007bff;
-
-color: white;
-
-font-size: 1rem;
-
-border-radius: 4px;
-
-cursor: pointer;
-
-transition: background-color 0.3s ease;
-
+    /* Aquí se eliminó el 'width: 100%;' para evitar conflictos con los nuevos botones */
+    padding: 0.75rem;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
-
-
 
 form button:hover {
-
-background-color: #0056b3;
-
+    background-color: #0056b3;
 }
-
-
 
 /* Estilos para la lista de productos y carrito */
 
 ul {
-
-max-width: 550px;
-
-margin: 0 auto;
-
-list-style-type: none;
-
-padding: 0;
-
+    max-width: 550px;
+    margin: 0 auto;
+    list-style-type: none;
+    padding: 0;
 }
-
-
 
 li {
-
-background-color: #ffffff;
-
-padding: 1rem;
-
-border-radius: 6px;
-
-margin-bottom: 1rem;
-
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-
-display: flex;
-
-justify-content: space-between;
-
-align-items: center;
-
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-
-
 
 a {
-
-text-decoration: none;
-
+    text-decoration: none;
 }
-
-
 
 .acciones-productos {
-
-text-align: center;
-
-margin-bottom: 2rem;
-
+    text-align: center;
+    margin-bottom: 2rem;
 }
-
-
 
 .acciones-productos a button {
-
-padding: 0.5rem 1rem;
-
-background-color: #28a745;
-
-color: white;
-
-border: none;
-
-border-radius: 4px;
-
-font-size: 0.9rem;
-
-cursor: pointer;
-
-transition: background-color 0.3s ease;
-
-margin: 5px;
-
+    padding: 0.5rem 1rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5px;
 }
-
-
 
 .acciones-productos a button:hover {
-
-background-color: #218838;
-
+    background-color: #218838;
 }
-
-
 
 .lista-productos-acciones {
-
-display: flex;
-
-gap: 10px;
-
-align-items: center;
-
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
-
-
 
 .carrito-container {
-
-position: fixed;
-
-top: 20px;
-
-right: 20px;
-
-width: 300px;
-
-background-color: #f8f8f8;
-
-border: 1px solid #ccc;
-
-padding: 15px;
-
-border-radius: 8px;
-
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-z-index: 1000;
-
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
 }
-
-
 
 .icono-carrito {
-
-width: 75px;
-
-height: auto;
-
-vertical-align: middle;
-
-margin-left: 10px;
-
+    width: 75px;
+    height: auto;
+    vertical-align: middle;
+    margin-left: 10px;
 }
-
-
 
 .icono-accion {
-
-width: 20px;
-
-height: 20px;
-
-vertical-align: middle;
-
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
 }
-
-
 
 .truncate-text {
-
-white-space: nowrap;
-
-overflow: hidden;
-
-text-overflow: ellipsis;
-
-max-width: 250px;
-
-display: inline-block;
-
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
+    display: inline-block;
 }
-
-
 
 /* Estilos para el Toast de confirmación */
 
 .toast {
-
-visibility: hidden;
-
-min-width: 250px;
-
-background-color: #dc3545;
-
-color: #fff;
-
-text-align: center;
-
-border-radius: 2px;
-
-padding: 16px;
-
-position: fixed;
-
-z-index: 1001;
-
-left: 50%;
-
-top: 30px;
-
-transform: translate(-50%, 0);
-
-font-size: 17px;
-
-opacity: 0;
-
-transition: opacity 0.5s;
-
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #dc3545;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1001;
+    left: 50%;
+    top: 30px;
+    transform: translate(-50%, 0);
+    font-size: 17px;
+    opacity: 0;
+    transition: opacity 0.5s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
-
 
 .toast p {
-
-margin-bottom: 15px;
-
+    margin-bottom: 15px;
 }
-
-
 
 .toast button {
-
-border: none;
-
-padding: 8px 15px;
-
-border-radius: 4px;
-
-cursor: pointer;
-
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
 }
-
-
 
 #btn-confirmar-eliminar-individual, #btn-confirmar-vaciar {
-
-background-color: #007bff;
-
-color: white;
-
-margin-right: 10px;
-
+    background-color: #007bff;
+    color: white;
+    margin-right: 10px;
 }
-
-
 
 #btn-cancelar-eliminar-individual, #btn-cancelar-vaciar {
-
-background-color: #28a745;
-
-color: white;
-
+    background-color: #28a745;
+    color: white;
 }
-
-
 
 .toast.show {
-
-visibility: visible;
-
-opacity: 1;
-
+    visibility: visible;
+    opacity: 1;
 }
-
-
 
 /* Media Query para pantallas pequeñas */
 
 @media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
 
-body {
+    ul, form {
+        max-width: 100%;
+    }
 
-padding: 1rem;
+    li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
 
+    .lista-productos-acciones {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .acciones-productos {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .carrito-container {
+        position: static;
+        width: 100%;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 1rem;
+        padding: 1rem;
+    }
+
+    .truncate-text {
+        max-width: 100%;
+    }
 }
-
-
-
-ul, form {
-
-max-width: 100%;
-
-}
-
-
-
-li {
-
-flex-direction: column;
-
-align-items: flex-start;
-
-gap: 0.5rem;
-
-}
-
-
-
-.lista-productos-acciones {
-
-flex-direction: column;
-
-align-items: flex-start;
-
-width: 100%;
-
-gap: 0.5rem;
-
-}
-
-
-
-.acciones-productos {
-
-display: flex;
-
-flex-direction: column;
-
-gap: 10px;
-
-}
-
-
-
-.carrito-container {
-
-position: static; /* CAMBIO CLAVE */
-
-width: 100%;
-
-border: 1px solid #ccc;
-
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-margin-top: 1rem;
-
-padding: 1rem;
-
-}
-
-
-
-.truncate-text {
-
-max-width: 100%;
-
-}
-
-}
-
-
 
 .admin-only {
-
-display: none;
-
+    display: none;
 }
-
-
 
 /* Estilos para la página de login */
 
 .login-container {
-
-max-width: 400px;
-
-padding: 2rem;
-
-background-color: #ffffff;
-
-border-radius: 8px;
-
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
-text-align: center;
-
+    max-width: 400px;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
-
-
 
 .login-container h2 {
-
-color: #212529;
-
-margin-bottom: 1.5rem;
-
+    color: #212529;
+    margin-bottom: 1.5rem;
 }
-
-
 
 .login-container input[type="text"],
-
 .login-container input[type="password"] {
-
-width: 100%;
-
-padding: 0.75rem;
-
-margin-bottom: 1rem;
-
-border: 1px solid #ced4da;
-
-border-radius: 4px;
-
-box-sizing: border-box;
-
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
-
-
 
 .login-container button {
-
-width: 100%;
-
-padding: 0.75rem;
-
-border: none;
-
-background-color: #28a745;
-
-color: white;
-
-font-size: 1rem;
-
-border-radius: 4px;
-
-cursor: pointer;
-
-transition: background-color 0.3s ease;
-
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
-
-
 
 .login-container button:hover {
-
-background-color: #218838;
-
+    background-color: #218838;
 }
 
-
-
-.logout-form {
-
-position: absolute;
-
-top: 1rem;
-
-left: 1rem;
-
-background-color: transparent;
-
-border: none;
-
-box-shadow: none;
-
-padding: 0;
-
-margin: 0;
-
+/* --- Estilos para la nueva cabecera de botones --- */
+.botones-header {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: flex;
+    gap: 10px;
 }
 
-
+/* Estilos para los botones de la cabecera */
+.logout-form button, .btn-registrarse, .btn-admin-login {
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
 
 .logout-form button {
-
-background-color: #f44336;
-
-color: white;
-
-border: none;
-
-padding: 10px 20px;
-
-text-align: center;
-
-text-decoration: none;
-
-display: inline-block;
-
-font-size: 16px;
-
-cursor: pointer;
-
-border-radius: 4px;
-
+    background-color: #f44336;
 }
-
-
 
 .logout-form button:hover {
-
-background-color: #d32f2f;
-
+    background-color: #d32f2f;
 }
 
-
-
-/* --- Estilos para los botones de Guardar y Cancelar --- */
-
-.button-container {
-
-display: flex;
-
-gap: 10px;
-
-width: 100%;
-
+.btn-registrarse {
+    background-color: #28a745;
 }
 
-
-
-.button-container .button-guardar,
-
-.button-container .button-cancelar {
-
-width: 100%;
-
-text-align: center;
-
-padding: 10px 20px;
-
-border-radius: 4px;
-
-text-decoration: none;
-
-box-sizing: border-box;
-
+.btn-registrarse:hover {
+    background-color: #218838;
 }
 
-
-
-.button-container .button-guardar {
-
-background-color: #007bff; /* Azul */
-
-color: white;
-
-border: none;
-
-cursor: pointer;
-
+.btn-admin-login {
+    background-color: #6c757d;
 }
 
+.btn-admin-login:hover {
+    background-color: #5a6268;
+}
 
+/* Estilos para el botón de 'Añadir al carrito' */
+.lista-productos-acciones form button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
-.button-container .button-cancelar {
+.lista-productos-acciones form button:hover {
+    background-color: #0056b3;
+}
 
-background-color: #dc3545; /* Rojo */
+/* Estilos para el botón de 'Vaciar Carrito' */
+#btn-vaciar-carrito {
+    background-color: #ffc107;
+    color: #212529;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
 
-color: white;
-
-border: none;
-
+#btn-vaciar-carrito:hover {
+    background-color: #e0a800;
 }
 
 .imagen-producto {

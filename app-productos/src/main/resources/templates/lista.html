@@ -5,7 +5,19 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-   
+    
+<div class="botones-header">
+    <form th:action="@{/logout}" sec:authorize="isAuthenticated()" method="post" class="logout-form">
+        <button type="submit">Cerrar Sesión</button>
+    </form>
+    <a th:href="@{/login}" sec:authorize="isAnonymous()">
+        <button class="btn-admin-login">Área de Administración</button>
+    </a>
+    <a th:href="@{/registro}" sec:authorize="isAnonymous()">
+        <button class="btn-registrarse">Registrarse</button>
+    </a>
+</div>
+
     <div id="confirmacion-eliminar" class="toast">
         <p>¿Estás seguro de que quieres eliminar este producto?</p>
         <button id="btn-confirmar-eliminar-individual">Confirmar</button>
@@ -20,10 +32,6 @@
 
     <h1>Productos</h1>
 
-    <form th:action="@{/logout}" sec:authorize="isAuthenticated()" method="post" class="logout-form">
-        <button type="submit">Cerrar Sesión</button>
-    </form>
-
     <div class="acciones-productos" th:if="${esAdmin}">
         <a th:href="@{/formulario}">
             <button>Crear Nuevo Producto</button>
@@ -35,7 +43,7 @@
           <img th:src="${p.imagenUrl}" alt="Imagen del producto" class="imagen-producto"/> 
             <span th:text="${p.nombre} + ' - ' + ${p.precio}" class="truncate-text"></span>
             <div class="lista-productos-acciones">
-                <form th:action="@{/carrito/agregar/{id}(id=${p.id})}" th:method="post">
+                <form th:action="@{/carrito/agregar/{id}(id=${p.id})}" th:method="post" th:if="${!esAdmin}">
                     <button type="submit">Añadir al carrito</button>
                 </form>
                 <a th:href="@{/eliminar/{id}(id=${p.id})}" class="eliminar-producto-link" th:if="${esAdmin}">
@@ -48,7 +56,7 @@
         </li>
     </ul>
 
-    <div class="carrito-container">
+    <div class="carrito-container" th:if="${!esAdmin}">
         <h2>Tu Carrito <img src="https://img.icons8.com/material-outlined/75/000000/shopping-cart.png" alt="Icono de carrito de compras" class="icono-carrito"></h2>
         <div th:if="${carrito != null and not carrito.items.empty}">
             <ul>
