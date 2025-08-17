@@ -32,6 +32,7 @@
 
     <ul>
         <li th:each="p : ${productos}">
+          <img th:src="${p.imagenUrl}" alt="Imagen del producto" class="imagen-producto"/> 
             <span th:text="${p.nombre} + ' - ' + ${p.precio}" class="truncate-text"></span>
             <div class="lista-productos-acciones">
                 <form th:action="@{/carrito/agregar/{id}(id=${p.id})}" th:method="post">

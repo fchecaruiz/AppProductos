@@ -10,6 +10,7 @@
         <input type="hidden" th:field="*{id}" />
         <p>Nombre: <input type="text" th:field="*{nombre}" /></p>
         <p>Precio: <input type="number" th:field="*{precio}" step="0.01" /></p>
+        <p>Imagen: <input type="text" th:field="*{imagenUrl}" placeholder="URL de la imagen" /></p>
         <div class="button-container">
             <button type="submit" class="button-guardar">Guardar Cambios</button>
             <a th:href="@{/}" class="button-cancelar">Cancelar</a>

@@ -33,6 +33,7 @@ public class ConfiguracionSeguridadWeb {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/registro", "/login", "/css/**", "/img/**").permitAll()
+                .requestMatchers("/formulario", "/guardar-edicion", "/editar/**", "/eliminar/**", "/eliminar-todos").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
@@ -43,4 +44,6 @@ public class ConfiguracionSeguridadWeb {
             .logout(logout -> logout.permitAll());
         return http.build();
     }
+    
+    
 }

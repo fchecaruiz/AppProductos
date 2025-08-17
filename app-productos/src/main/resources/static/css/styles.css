@@ -671,3 +671,10 @@ border: none;
 
 }
 
+.imagen-producto {
+    width: 150px;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
