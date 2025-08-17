@@ -236,6 +236,13 @@ a {
     .truncate-text {
         max-width: 100%;
     }
+    .botones-header {
+        position: static;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+        margin-bottom: 1rem;
+    }
 }
 
 .admin-only {
