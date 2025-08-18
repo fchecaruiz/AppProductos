@@ -254,7 +254,6 @@ a {
     width: 100%;
     padding: 0.75rem;
     border: none;
-    background-color: #28a745;
     color: white;
     font-size: 1rem;
     border-radius: 4px;
@@ -263,7 +262,7 @@ a {
 }
 
 .login-container button:hover {
-    background-color: #218838;
+    background-color:rgb(255, 0, 0);
 }
 
 /* --- Estilos para la nueva cabecera de botones --- */
@@ -289,32 +288,29 @@ a {
    
 }
 
-.btn-registrarse {
-	padding: 10px 28px;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    width: 100%;
+#bt-entrar {
+    background-color: #007bff; /* Color del botón de entrar */
 }
+
+.btn-registro-header {
+    background-color: #6f42c1;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin:25px;
+}
+
+
 .logout-form button {
     background-color: #f44336;
 }
 
 .logout-form button:hover {
     background-color: #d32f2f;
-}
-
-.btn-registrarse {
-    background-color: #28a745;
-}
-
-.btn-registrarse:hover {
-    background-color: #218838;
 }
 
 .btn-admin-login {
@@ -361,6 +357,7 @@ a {
     margin-bottom: 10px;
     border-radius: 8px;
 }
+
 
 
 
@@ -433,6 +430,18 @@ a {
      width: 85%;
      height: auto;
     }
+    .login-header button, .btn-registro-header button{
+        font-size: 0.9rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+        .btn-registro-header {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+}
 
         	
 }
