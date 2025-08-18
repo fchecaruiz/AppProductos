@@ -120,6 +120,8 @@ a {
 }
 
 .carrito-container {
+	max-height: 800px; 
+    overflow-y: auto;
     position:fixed;
     top: 20px;
     right:50px;
