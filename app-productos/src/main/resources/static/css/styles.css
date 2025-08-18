@@ -1,6 +1,7 @@
 /* Estilos globales */
 
 html, body {
+	width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -113,10 +114,10 @@ a {
 }
 
 .carrito-container {
-    position: fixed;
+    position:fixed;
     top: 20px;
-    right: 20px;
-    width: 300px;
+    right:50px;
+    width: 250px;
     background-color: #ffffff;
     border: 1px solid #ccc;
     padding: 15px;
@@ -196,82 +197,7 @@ a {
 
 /* Media Query para pantallas pequeñas */
 
-@media (max-width: 768px) {
-    body {
-        padding: 1rem;
-    }
 
-    ul, form {
-        max-width: 100%;
-    }
-
-    li {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
-
-    .lista-productos-acciones {
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
-        gap: 0.5rem;
-    }
-
-    .acciones-productos {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .carrito-container {
-        position: static;
-        width: 100%;
-        border: 1px solid #ccc;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        margin-top: 1rem;
-        padding: 1rem;
-    }
-
-    .truncate-text {
-        max-width: 100%;
-    }
-    .botones-header {
-        position: static;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
-        margin-bottom: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-  .carrito-container {
-    padding: 0.5rem;
-  }
-
-  .imagen-producto {
-    width: 100%;
-    height: auto;
-  }
-
-  .botones-header {
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .lista-productos-acciones form button {
-    width: 100%;
-  }
-
-  .acciones-productos a button {
-    width: 100%;
-  }
-
-  h1 {
-    font-size: 1.5rem;
-  }
-}
 .admin-only {
     display: none;
 }
@@ -328,7 +254,7 @@ a {
 }
 
 /* Estilos para los botones de la cabecera */
-.logout-form button, .btn-registrarse, .btn-admin-login {
+.logout-form button, .btn-admin-login{
     padding: 10px 20px;
     border: none;
     color: white;
@@ -338,8 +264,21 @@ a {
     text-align: center;
     text-decoration: none;
     display: inline-block;
+   
 }
 
+.btn-registrarse {
+	padding: 10px 28px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+}
 .logout-form button {
     background-color: #f44336;
 }
@@ -400,3 +339,79 @@ a {
     margin-bottom: 10px;
     border-radius: 8px;
 }
+
+
+
+
+
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    ul, form {
+        max-width: 100%;
+    }
+
+    li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .lista-productos-acciones {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .acciones-productos {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .carrito-container {
+        position:relative;
+        width: 100%;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 1rem;
+        padding: 1rem;
+        top: auto;
+        right: auto;
+        left: 0;
+        bottom: 0;
+        z-index: 1000;
+        
+    }
+
+    .truncate-text {
+        max-width: 100%;
+    }
+    .botones-header {
+        position: static;
+        flex-direction:column;
+        align-items: flex-start;
+        gap: 5px;
+        margin-bottom: 1rem;
+    }
+    
+    .botones-header > form {
+    order: -1;
+    width: 100%;
+   }
+   img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+   }
+       .imagen-producto {
+            width: 50%;
+            height: auto;
+        }
+
+        	
+}
+

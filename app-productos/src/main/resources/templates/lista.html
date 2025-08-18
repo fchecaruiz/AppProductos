@@ -7,17 +7,17 @@
 </head>
 <body>
     
-    <div class="botones-header">
-        <form th:action="@{/logout}" sec:authorize="isAuthenticated()" method="post" class="logout-form">
-            <button type="submit">Cerrar Sesión</button>
-        </form>
-        <a th:href="@{/login}" sec:authorize="isAnonymous()">
-            <button class="btn-admin-login">Área de Administración</button>
-        </a>
-        <a th:href="@{/registro}" sec:authorize="isAnonymous()">
-            <button class="btn-registrarse">Registrarse</button>
-        </a>
-    </div>
+<div class="botones-header">
+    <form th:action="@{/logout}" sec:authorize="isAuthenticated()" method="post" class="logout-form">
+        <button type="submit">Cerrar Sesión</button>
+    </form>
+    <a th:href="@{/login}" sec:authorize="isAnonymous()">
+        <button class="btn-admin-login">Administrador</button>
+    </a>
+    <a th:href="@{/registro}" sec:authorize="isAnonymous()">
+        <button class="btn-registrarse">Registrarse</button>
+    </a>
+</div>
 
     <div id="confirmacion-eliminar" class="toast">
         <p>¿Estás seguro de que quieres eliminar este producto?</p>
@@ -32,11 +32,13 @@
     </div>
 
     <h1>Productos</h1>
+
     <div class="acciones-productos" th:if="${esAdmin}">
         <a th:href="@{/formulario}">
             <button>Crear Nuevo Producto</button>
         </a>
     </div>
+
     <ul>
         <li th:each="p : ${productos}">
           <img th:src="${p.imagenUrl}" alt="Imagen del producto" class="imagen-producto"/> 
