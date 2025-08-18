@@ -402,15 +402,15 @@ a {
     order: -1;
     width: 100%;
    }
-   img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+       img {
+    max-width: 100%;
+    height: auto;
+    display: block;
    }
-       .imagen-producto {
-            width: 50%;
-            height: auto;
-        }
+   .imagen-producto {
+     width: 85%;
+     height: auto;
+    }
 
         	
 }
