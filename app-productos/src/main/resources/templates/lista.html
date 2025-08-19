@@ -14,7 +14,7 @@
     <a th:href="@{/login}" sec:authorize="isAnonymous()">
         <button class="btn-admin-login">Administrador</button>
     </a>
-    </div>
+</div>
 
     <div id="confirmacion-eliminar" class="toast">
         <p>¿Estás seguro de que quieres eliminar este producto?</p>
@@ -35,7 +35,7 @@
         <button id="btn-cancelar-vaciar">Cancelar</button>
     </div>
 
-    <h1>Productos</h1>
+    <div th:replace="~{header :: app-header}"></div>
 
     <div class="acciones-productos" th:if="${esAdmin}">
         <a th:href="@{/formulario}">
@@ -163,5 +163,15 @@
         }
     });
     </script>
+    
+        <footer class="app-footer">
+        <p>&copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}"></span> Tu Tienda Online. Todos los derechos reservados.</p>
+    </footer>
+    
+    
+
+
 </body>
+
+
 </html>
