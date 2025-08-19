@@ -14,15 +14,19 @@
     <a th:href="@{/login}" sec:authorize="isAnonymous()">
         <button class="btn-admin-login">Administrador</button>
     </a>
-    <!--  <a th:href="@{/registro}" sec:authorize="isAnonymous()">
-        <button class="btn-registrarse">Registrarse</button>
-    </a>-->
-</div>
+    </div>
 
     <div id="confirmacion-eliminar" class="toast">
         <p>¿Estás seguro de que quieres eliminar este producto?</p>
         <button id="btn-confirmar-eliminar-individual">Confirmar</button>
         <button id="btn-cancelar-eliminar-individual">Cancelar</button>
+    </div>
+    
+    
+    <div id="confirmacion-compra" class="toast">
+         <p>¿Estás seguro de que quieres comprar los productos?</p>
+         <button id="btn-confirmar-compra">Confirmar</button>
+         <button id="btn-cancelar-compra">Cancelar</button>
     </div>
 
     <div id="confirmacion-vaciar-carrito" class="toast">
@@ -76,62 +80,88 @@
         <div th:if="${carrito == null or carrito.items.empty}">
             <p>El carrito está vacío.</p>
         </div>
-          
-        <a href="/comprar" class="btn-comprar">
-           <button class="btn-carrito">Comprar</button>
-       </a>
-        <button id="btn-vaciar-carrito" class="btn-carrito">Vaciar Carrito</button>
+         <div class="carrito-botones"> 
+            <button id="btn-comprar" class="btn-carrito">Comprar</button>
+            <button id="btn-vaciar-carrito" class="btn-carrito">Vaciar Carrito</button>
+        </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const toastEliminarProducto = document.getElementById('confirmacion-eliminar');
-            const toastVaciarCarrito = document.getElementById('confirmacion-vaciar-carrito');
-            const btnConfirmarEliminar = document.getElementById('btn-confirmar-eliminar-individual');
-            const btnCancelarEliminar = document.getElementById('btn-cancelar-eliminar-individual');
-            const btnConfirmarVaciar = document.getElementById('btn-confirmar-vaciar');
-            const btnCancelarVaciar = document.getElementById('btn-cancelar-vaciar');
-            const enlacesEliminarProducto = document.querySelectorAll('.eliminar-producto-link');
-            const enlacesEliminarCarrito = document.querySelectorAll('.eliminar-carrito-link');
-            const btnVaciarCarrito = document.getElementById('btn-vaciar-carrito');
-            let urlAccion = '';
+    document.addEventListener('DOMContentLoaded', function () {
+        const toastEliminarProducto = document.getElementById('confirmacion-eliminar');
+        const toastVaciarCarrito = document.getElementById('confirmacion-vaciar-carrito');
+        const toastConfirmacionCompra = document.getElementById('confirmacion-compra'); // Nuevo toast
+        
+        const btnConfirmarEliminar = document.getElementById('btn-confirmar-eliminar-individual');
+        const btnCancelarEliminar = document.getElementById('btn-cancelar-eliminar-individual');
+        const btnConfirmarVaciar = document.getElementById('btn-confirmar-vaciar');
+        const btnCancelarVaciar = document.getElementById('btn-cancelar-vaciar');
+        const btnComprar = document.getElementById('btn-comprar'); // Nuevo botón
+        const btnConfirmarCompra = document.getElementById('btn-confirmar-compra'); // Nuevo botón
+        const btnCancelarCompra = document.getElementById('btn-cancelar-compra'); // Nuevo botón
 
-            enlacesEliminarProducto.forEach(enlace => {
-                enlace.addEventListener('click', function(event) {
-                    event.preventDefault(); 
-                    urlAccion = enlace.href; 
-                    toastEliminarProducto.classList.add('show');
-                });
-            });
+        const enlacesEliminarProducto = document.querySelectorAll('.eliminar-producto-link');
+        const enlacesEliminarCarrito = document.querySelectorAll('.eliminar-carrito-link');
+        const btnVaciarCarrito = document.getElementById('btn-vaciar-carrito');
+        let urlAccion = '';
 
-            enlacesEliminarCarrito.forEach(enlace => {
-                enlace.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    urlAccion = enlace.href;
-                    toastEliminarProducto.classList.add('show');
-                });
-            });
-
-            if (btnVaciarCarrito) {
-                btnVaciarCarrito.addEventListener('click', function(event) {
-                    urlAccion = '/carrito/resetear';
-                    toastVaciarCarrito.classList.add('show');
-                });
-            }
-            
-            btnConfirmarEliminar.addEventListener('click', function() {
-                window.location.href = urlAccion;
-            });
-            btnCancelarEliminar.addEventListener('click', function() {
-                toastEliminarProducto.classList.remove('show');
-            });
-            btnConfirmarVaciar.addEventListener('click', function() {
-                window.location.href = urlAccion;
-            });
-            btnCancelarVaciar.addEventListener('click', function() {
-                toastVaciarCarrito.classList.remove('show');
+        enlacesEliminarProducto.forEach(enlace => {
+            enlace.addEventListener('click', function(event) {
+                event.preventDefault(); 
+                urlAccion = enlace.href; 
+                toastEliminarProducto.classList.add('show');
             });
         });
+
+        enlacesEliminarCarrito.forEach(enlace => {
+            enlace.addEventListener('click', function(event) {
+                event.preventDefault();
+                urlAccion = enlace.href;
+                toastEliminarProducto.classList.add('show');
+            });
+        });
+
+        if (btnVaciarCarrito) {
+            btnVaciarCarrito.addEventListener('click', function(event) {
+                urlAccion = '/carrito/resetear';
+                toastVaciarCarrito.classList.add('show');
+            });
+        }
+
+        if (btnComprar) { // Lógica para el botón "Comprar"
+            btnComprar.addEventListener('click', function(event) {
+                event.preventDefault();
+                urlAccion = '/comprar';
+                toastConfirmacionCompra.classList.add('show');
+            });
+        }
+
+        btnConfirmarEliminar.addEventListener('click', function() {
+            window.location.href = urlAccion;
+        });
+        btnCancelarEliminar.addEventListener('click', function() {
+            toastEliminarProducto.classList.remove('show');
+        });
+        btnConfirmarVaciar.addEventListener('click', function() {
+            window.location.href = urlAccion;
+        });
+        btnCancelarVaciar.addEventListener('click', function() {
+            toastVaciarCarrito.classList.remove('show');
+        });
+
+        // Lógica para el nuevo toast de compra
+        if (btnConfirmarCompra) {
+            btnConfirmarCompra.addEventListener('click', function() {
+                window.location.href = urlAccion;
+            });
+        }
+
+        if (btnCancelarCompra) {
+            btnCancelarCompra.addEventListener('click', function() {
+                toastConfirmacionCompra.classList.remove('show');
+            });
+        }
+    });
     </script>
 </body>
 </html>

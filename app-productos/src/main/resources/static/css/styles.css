@@ -443,6 +443,12 @@ a {
     }
 }
 
+.carrito-botones {
+    display: flex;
+    gap: 10px; /* Separación entre botones */
+    margin-top: 1rem;
+}
+
 .btn-carrito {
     border: none;
     padding: 10px 20px;
@@ -450,20 +456,33 @@ a {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: 100%;
+    flex: 1; /* Para que ambos ocupen el mismo ancho */
 }
 
-.btn-comprar button {
-    background-color: #28a745;
+#btn-comprar {
+    background-color: #28a745; /* Verde */
     color: white;
-    margin: 10px 0;
 }
 
 #btn-vaciar-carrito {
-    background-color: #ffc107;
-    color: #212529;
+    background-color: #ffc107; /* Amarillo */
+    color: #333;
 }
 
-        	
+#confirmacion-compra button {
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+}
 
+#btn-confirmar-compra {
+    background-color: #28a745; /* Verde para Confirmar */
+    margin-right: 10px;
+}
+
+#btn-cancelar-compra {
+    background-color: rgb(0, 0, 255); /* Rojo para Cancelar */
+}
 
