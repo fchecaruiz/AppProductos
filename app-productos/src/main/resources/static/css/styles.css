@@ -78,23 +78,26 @@ form button:hover {
 /* Estilos para la lista de productos y carrito */
 
 ul {
-    max-width: 550px;
-    margin: 0 auto;
     list-style-type: none;
     padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content:evenly;
 }
 
 li {
     background-color: #ffffff;
     padding: 1rem;
     border-radius: 6px;
-    margin-bottom: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    width: 250px;
+    text-align: center;
 }
-
 a {
     text-decoration: none;
 }
@@ -566,3 +569,8 @@ a {
   text-align: center;
   padding: 20px;
 }
+
+
+/* SEPARAR PRODUCTOS Y CARRITO */
+
+

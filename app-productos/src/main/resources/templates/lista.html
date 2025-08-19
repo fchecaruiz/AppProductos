@@ -42,7 +42,9 @@
             <button>Crear Nuevo Producto</button>
         </a>
     </div>
-
+    
+    
+    
     <ul>
         <li th:each="p : ${productos}">
           <img th:src="${p.imagenUrl}" alt="Imagen del producto" class="imagen-producto"/> 
@@ -76,7 +78,9 @@
             <h3>IVA (21%): <span th:text="${carrito.precioTotal * 0.21}"></span></h3>
             <h3>Precio con IVA: <span th:text="${carrito.precioTotalConIVA}"></span></h3>
             
-        </div>
+     </div>
+  
+    
         <div th:if="${carrito == null or carrito.items.empty}">
             <p>El carrito está vacío.</p>
         </div>
