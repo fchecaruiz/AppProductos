@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 
-@SessionScope
+
 @Component
+@SessionScope
 public class Carrito {
 
     private List<Producto> items = new ArrayList<>();
@@ -35,5 +36,10 @@ public class Carrito {
 
     public double getPrecioTotal() {
         return items.stream().mapToDouble(Producto::getPrecio).sum();
+    }
+    
+    public double getPrecioTotalConIVA() {
+        double iva = getPrecioTotal() * 0.21; // Calculo del 21% de IVA
+        return getPrecioTotal() + iva;
     }
 }

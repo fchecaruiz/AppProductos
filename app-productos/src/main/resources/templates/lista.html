@@ -69,11 +69,18 @@
                 </li>
             </ul>
             <h3>Precio Total: <span th:text="${carrito.precioTotal}"></span></h3>
+            <h3>IVA (21%): <span th:text="${carrito.precioTotal * 0.21}"></span></h3>
+            <h3>Precio con IVA: <span th:text="${carrito.precioTotalConIVA}"></span></h3>
+            
         </div>
         <div th:if="${carrito == null or carrito.items.empty}">
             <p>El carrito está vacío.</p>
         </div>
-        <button id="btn-vaciar-carrito">Vaciar Carrito</button>
+          
+        <a href="/comprar" class="btn-comprar">
+           <button class="btn-carrito">Comprar</button>
+       </a>
+        <button id="btn-vaciar-carrito" class="btn-carrito">Vaciar Carrito</button>
     </div>
 
     <script>
