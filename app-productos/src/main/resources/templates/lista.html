@@ -44,7 +44,8 @@
     </div>
     
     
-    
+
+       
     <ul>
         <li th:each="p : ${productos}">
           <img th:src="${p.imagenUrl}" alt="Imagen del producto" class="imagen-producto"/> 
@@ -62,7 +63,8 @@
             </div>
         </li>
     </ul>
-
+    
+    
     <div class="carrito-container" th:if="${!esAdmin}">
         <h2>Tu Carrito <img src="https://img.icons8.com/material-outlined/75/000000/shopping-cart.png" alt="Icono de carrito de compras" class="icono-carrito"></h2>
         <div th:if="${carrito != null and not carrito.items.empty}">
@@ -79,7 +81,8 @@
             <h3>Precio con IVA: <span th:text="${carrito.precioTotalConIVA}"></span></h3>
             
      </div>
-  
+    
+ 
     
         <div th:if="${carrito == null or carrito.items.empty}">
             <p>El carrito está vacío.</p>
