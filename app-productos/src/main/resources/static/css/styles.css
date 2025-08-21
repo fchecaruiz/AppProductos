@@ -173,7 +173,8 @@ a {
     background-color: #dc3545;
     color: #fff;
     text-align: center;
-    border-radius: 2px;
+    border:1px solid rgb(0, 0, 0);
+    border-radius: 8px;
     padding: 16px;
     position: fixed;
     z-index: 1001;
@@ -638,6 +639,24 @@ a {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+}
+
+
+/* --- Toasts nuevos (carrito vacío) --- */
+/* Toast cuando el carrito está vacío y se pulsa COMPRAR */
+#carrito-vacio-compra.toast {
+  background-color: rgb(128, 255, 0); /* rojo */
+  color: rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 8px;
+}
+
+/* Toast cuando el carrito está vacío y se pulsa VACIAR */
+#carrito-vacio-vaciar.toast {
+  background-color: #ffc107; /* amarillo */
+  color: #212529;
+  border: 1px solid #212529;
+  border-radius: 8px;
 }
 
 

@@ -22,7 +22,6 @@
         <button id="btn-cancelar-eliminar-individual">Cancelar</button>
     </div>
     
-    
     <div id="confirmacion-compra" class="toast">
          <p>¿Estás seguro de que quieres comprar los productos?</p>
          <button id="btn-confirmar-compra">Confirmar</button>
@@ -35,6 +34,17 @@
         <button id="btn-cancelar-vaciar">Cancelar</button>
     </div>
 
+    <!-- Toasts nuevos -->
+    <div id="carrito-vacio-compra" class="toast">
+        <p>No hay productos en el carrito para comprar.</p>
+        <button onclick="this.parentElement.classList.remove('show')">Cerrar</button>
+    </div>
+
+    <div id="carrito-vacio-vaciar" class="toast">
+        <p>No se puede vaciar el carrito porque está vacío.</p>
+        <button onclick="this.parentElement.classList.remove('show')">Cerrar</button>
+    </div>
+
     <div th:replace="~{header :: app-header}"></div>
 
     <div class="acciones-productos" th:if="${esAdmin}">
@@ -43,9 +53,6 @@
         </a>
     </div>
     
-    
-
-       
     <ul>
         <li th:each="p : ${productos}">
           <img th:src="${p.imagenUrl}" alt="Imagen del producto" class="imagen-producto"/> 
@@ -64,7 +71,6 @@
         </li>
     </ul>
     
-    
     <div class="carrito-container" th:if="${!esAdmin or true}">
         <h2>Tu Carrito <img src="https://img.icons8.com/material-outlined/75/000000/shopping-cart.png" alt="Icono de carrito de compras" class="icono-carrito"></h2>
         <div th:if="${carrito != null and not carrito.items.empty}">
@@ -79,15 +85,12 @@
             <h3>Precio Total: <span th:text="${carrito.precioTotal}"></span></h3>
             <h3>IVA (21%): <span th:text="${carrito.precioTotal * 0.21}"></span></h3>
             <h3>Precio con IVA: <span th:text="${carrito.precioTotalConIVA}"></span></h3>
-            
-     </div>
-    
- 
+        </div>
     
         <div th:if="${carrito == null or carrito.items.empty}">
             <p>El carrito está vacío.</p>
         </div>
-         <div class="carrito-botones"> 
+        <div class="carrito-botones"> 
             <button id="btn-comprar" class="btn-carrito">Comprar</button>
             <button id="btn-vaciar-carrito" class="btn-carrito">Vaciar Carrito</button>
         </div>
@@ -97,15 +100,17 @@
     document.addEventListener('DOMContentLoaded', function () {
         const toastEliminarProducto = document.getElementById('confirmacion-eliminar');
         const toastVaciarCarrito = document.getElementById('confirmacion-vaciar-carrito');
-        const toastConfirmacionCompra = document.getElementById('confirmacion-compra'); // Nuevo toast
+        const toastConfirmacionCompra = document.getElementById('confirmacion-compra');
+        const toastCarritoVacioCompra = document.getElementById('carrito-vacio-compra');
+        const toastCarritoVacioVaciar = document.getElementById('carrito-vacio-vaciar');
         
         const btnConfirmarEliminar = document.getElementById('btn-confirmar-eliminar-individual');
         const btnCancelarEliminar = document.getElementById('btn-cancelar-eliminar-individual');
         const btnConfirmarVaciar = document.getElementById('btn-confirmar-vaciar');
         const btnCancelarVaciar = document.getElementById('btn-cancelar-vaciar');
-        const btnComprar = document.getElementById('btn-comprar'); // Nuevo botón
-        const btnConfirmarCompra = document.getElementById('btn-confirmar-compra'); // Nuevo botón
-        const btnCancelarCompra = document.getElementById('btn-cancelar-compra'); // Nuevo botón
+        const btnComprar = document.getElementById('btn-comprar');
+        const btnConfirmarCompra = document.getElementById('btn-confirmar-compra');
+        const btnCancelarCompra = document.getElementById('btn-cancelar-compra');
 
         const enlacesEliminarProducto = document.querySelectorAll('.eliminar-producto-link');
         const enlacesEliminarCarrito = document.querySelectorAll('.eliminar-carrito-link');
@@ -130,16 +135,27 @@
 
         if (btnVaciarCarrito) {
             btnVaciarCarrito.addEventListener('click', function(event) {
-                urlAccion = '/carrito/resetear';
-                toastVaciarCarrito.classList.add('show');
+                event.preventDefault();
+                const carritoVacio = document.querySelectorAll('.carrito-container ul li').length === 0;
+                if (carritoVacio) {
+                    toastCarritoVacioVaciar.classList.add('show');
+                } else {
+                    urlAccion = '/carrito/resetear';
+                    toastVaciarCarrito.classList.add('show');
+                }
             });
         }
 
-        if (btnComprar) { // Lógica para el botón "Comprar"
+        if (btnComprar) {
             btnComprar.addEventListener('click', function(event) {
                 event.preventDefault();
-                urlAccion = '/comprar';
-                toastConfirmacionCompra.classList.add('show');
+                const carritoVacio = document.querySelectorAll('.carrito-container ul li').length === 0;
+                if (carritoVacio) {
+                    toastCarritoVacioCompra.classList.add('show');
+                } else {
+                    urlAccion = '/comprar';
+                    toastConfirmacionCompra.classList.add('show');
+                }
             });
         }
 
@@ -156,7 +172,6 @@
             toastVaciarCarrito.classList.remove('show');
         });
 
-        // Lógica para el nuevo toast de compra
         if (btnConfirmarCompra) {
             btnConfirmarCompra.addEventListener('click', function() {
                 window.location.href = urlAccion;
@@ -171,16 +186,9 @@
     });
     </script>
     
-        <footer class="app-footer">
-            <p>&copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}"></span> Tu Tienda Online. Todos los derechos reservados.</p>
-            <a href="https://formacion.ipartek.com/" target="_blank" class="enlace-footer">Formación Ipartek</a>
-            
-        </footer>
-    
-    
-
-
+    <footer class="app-footer">
+        <p>&copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}"></span> Tu Tienda Online. Todos los derechos reservados.</p>
+        <a href="https://formacion.ipartek.com/" target="_blank" class="enlace-footer">Formación Ipartek</a>
+    </footer>
 </body>
-
-
 </html>
