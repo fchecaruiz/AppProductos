@@ -378,7 +378,7 @@ a {
 
 @media (max-width: 768px) {
     body {
-        padding-bottom: 200px; /* espacio para los botones fijos */
+        padding-bottom: 200px;
     }
 
     ul, form {
@@ -405,17 +405,16 @@ a {
         gap: 10px;
     }
 
-    /* Carrito ajustado para móviles */
-.carrito-container {
-    position: static;       /* entra en el flujo normal */
-    width: 100%;
-    margin: 1rem 0;         
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    background-color: #fff;
-}
+    .carrito-container {
+        position: static;
+        width: 100%;
+        margin: 1rem 0;
+        padding: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        background-color: #fff;
+    }
 
     .truncate-text {
         max-width: 100%;
@@ -437,7 +436,7 @@ a {
     img {
         max-width: 100%;
         height: 100%;
-        display:block;
+        display: block;
     }
 
     .imagen-producto {
@@ -456,28 +455,41 @@ a {
         padding: 8px 16px;
         font-size: 0.9rem;
     }
-    
-    
-    .app-header {
-    text-align: center;
-    padding: 1rem;
-    }
-    .app-header h1 {
-    margin-right: 50px;
-}
-    
-    
-    .header-logo {
+
+    /* Header responsive */
+    .header-container {
         display: flex;
-        justify-content: center;
+        justify-content: center;   /* centra el título */
+        align-items: center;
+        position: relative;        /* referencia para el logo */
+    }
+
+    .app-header {
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .app-header h1 {
+        font-size: 1.2rem;
+    }
+    
+    .logo-tienda {
+        width: 60px;          
+        position: static;  
+        display:none;
+       
+    }
+
+    /* Footer responsive */
+    .app-footer {
+        display: flex;
+        justify-content: space-between;
         align-items: center;
     }
-    
-    
-    
 }
 
 
+/*---------------------------------------------*/
 .carrito-botones {
     display: flex;
     flex-direction:column;
@@ -577,37 +589,57 @@ a {
 
 .header-container {
     display: flex;
-    justify-content: center;
+    justify-content: center;   /* centra el texto */
     align-items: center;
+    position: relative;
 }
 
 .header-logo {
     text-decoration: none;
     color: white;
+}
 
-}   
+.logo-tienda {
+    width: 90px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: absolute;
+    left: 20px;               /* logo pegado a la derecha */
+}
+
 
 /* footer */
-
 .app-footer {
-  position: static;   /* importante para que esté en flujo normal */
+	position:relative;
+  display: flex;
+  justify-content: space-between; /* texto centrado + enlace a la izquierda */
+  align-items: center;            /* centra verticalmente */
   background-color: #333;
   color: white;
-  text-align: center;
   padding: 20px;
   width: 100%;
 }
 
 
-/*.app-footer {
-  margin-top: auto;
-  background-color: #333;
-  color: white;
+.enlace-footer {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  color: rgb(222, 254, 1);
+  text-decoration: none;
+  margin-right: 10rem;
+}
+.app-footer p {
   text-align: center;
-  padding: 20px;
-}*/
+  flex: 1;
+}
+.app-footer p {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
 
-/* SEPARAR PRODUCTOS Y CARRITO */
 
 
