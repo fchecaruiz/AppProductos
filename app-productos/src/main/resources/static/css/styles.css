@@ -9,15 +9,12 @@ html, body {
    
 }
 
-
-
 body {
     background-color: #f8f9fa;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #333;
     overflow-x: hidden;
 }
-
 
 .login-page {
     height: 100vh;
@@ -32,7 +29,7 @@ h1 {
     margin-bottom: 2rem;
 }
 
-/* Estilos para formularios en general */
+/* formularios en general */
 .formulario-login {
   background-color: white;
   padding: 30px;
@@ -58,7 +55,6 @@ form input[type="password"] {
 }
 
 form button {
-    /* Aquí se eliminó el 'width: 100%;' para evitar conflictos con los nuevos botones */
     padding: 0.75rem;
     border: none;
     background-color: #007bff;
@@ -73,8 +69,10 @@ form button:hover {
     background-color: #0056b3;
 }
 
-/* Estilos para la lista de productos y carrito */
-
+/*  lista de productos y carrito */
+body:not(.admin) ul {
+    margin-right: 300px; 
+}
 ul {
     list-style-type: none;
     padding: 10;
@@ -83,8 +81,17 @@ ul {
     flex-wrap: wrap;
     gap: 20px;
     justify-content:evenly;
-    margin-right: 300px;
 }
+
+
+body.admin .carrito-container {
+    display: none;
+}
+body.admin ul {
+    margin-right: 0;
+    justify-content: center;
+}
+
 
 li {
     background-color: #ffffff;
@@ -214,14 +221,13 @@ a {
     opacity: 1;
 }
 
-/* Media Query para pantallas pequeñas */
 
 
 .admin-only {
     display: none;
 }
 
-/* Estilos para la página de login */
+/*  página de login */
 
 .login-container {
     max-width: 400px;
@@ -276,7 +282,7 @@ a {
     background-color:rgb(255, 0, 0);
 }
 
-/* --- Estilos para la nueva cabecera de botones --- */
+/*  cabecera de botones --- */
 .botones-header {
     position: fixed; 
     bottom: 50rem;
@@ -286,7 +292,6 @@ a {
     z-index: 20000;
     gap:10px;
 }
-
 
 /* Estilos para los botones de la cabecera */
 .logout-form button, .btn-admin-login{
@@ -299,11 +304,10 @@ a {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-   
 }
 
 #bt-entrar {
-    background-color: #007bff; /* Color del botón de entrar */
+    background-color: #007bff;
 }
 
 .btn-registro-header {
@@ -317,7 +321,6 @@ a {
     transition: background-color 0.3s ease;
     margin:25px;
 }
-
 
 .logout-form button {
     background-color: #f44336;
@@ -335,7 +338,7 @@ a {
     background-color: #5a6268;
 }
 
-/* Estilos para el botón de 'Añadir al carrito' */
+/*  botón de 'Añadir al carrito' */
 .lista-productos-acciones form button {
     background-color: #007bff;
     color: white;
@@ -350,7 +353,7 @@ a {
     background-color: #0056b3;
 }
 
-/* Estilos para el botón de 'Vaciar Carrito' */
+/* botón de 'Vaciar Carrito' */
 #btn-vaciar-carrito {
     background-color: #ffc107;
     color: #212529;
@@ -366,16 +369,12 @@ a {
 }
 
 .imagen-producto {
-    width: 200px;        /* ancho fijo */
-    height: 150px;       /* alto fijo */
-    object-fit: cover;   /* recorta y centra la imagen */
+    width: 200px;        
+    height: 150px;       
+    object-fit: cover;   
     margin-bottom: 10px;
     border-radius: 8px;
 }
-
-
-
-
 
 @media (max-width: 768px) {
     body {
@@ -457,12 +456,12 @@ a {
         font-size: 0.9rem;
     }
 
-    /* Header responsive */
+  
     .header-container {
         display: flex;
-        justify-content: center;   /* centra el título */
+        justify-content: center;   
         align-items: center;
-        position: relative;        /* referencia para el logo */
+        position: relative;        
     }
 
     .app-header {
@@ -478,7 +477,6 @@ a {
         width: 60px;          
         position: static;  
         display:none;
-       
     }
 
     /* Footer responsive */
@@ -488,7 +486,6 @@ a {
         align-items: center;
     }
 }
-
 
 /*---------------------------------------------*/
 .carrito-botones {
@@ -513,12 +510,12 @@ a {
 }
 
 #btn-comprar {
-    background-color: #28a745; /* Verde */
+    background-color: #28a745; 
     color: white;
 }
 
 #btn-vaciar-carrito {
-    background-color: #ffc107; /* Amarillo */
+    background-color: #ffc107; 
     color: #333;
 }
 
@@ -531,14 +528,13 @@ a {
 }
 
 #btn-confirmar-compra {
-    background-color: #28a745; /* Verde para Confirmar */
+    background-color: #28a745; 
     margin-right: 10px;
 }
 
 #btn-cancelar-compra {
-    background-color: rgb(0, 0, 255); /* Rojo para Cancelar */
+    background-color: rgb(0, 0, 255); 
 }
-
 
 .confirmacion-container {
     max-width: 500px;
@@ -571,7 +567,6 @@ a {
     background-color: #0056b3;
 }
 
-
 /* CABECERA HEADER*/
 
 .app-header {
@@ -584,13 +579,11 @@ a {
     top: 0;
     z-index: 1000;
     margin-bottom: 20px;
-
-    
 }
 
 .header-container {
     display: flex;
-    justify-content: center;   /* centra el texto */
+    justify-content: center;  
     align-items: center;
     position: relative;
 }
@@ -606,22 +599,20 @@ a {
     border-radius: 50%;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     position: absolute;
-    left: 20px;               /* logo pegado a la derecha */
+    left: 20px;             
 }
-
 
 /* footer */
 .app-footer {
 	position:relative;
   display: flex;
-  justify-content: space-between; /* texto centrado + enlace a la izquierda */
-  align-items: center;            /* centra verticalmente */
+  justify-content: space-between; 
+  align-items: center;            
   background-color: #333;
   color: white;
   padding: 20px;
   width: 100%;
 }
-
 
 .enlace-footer {
   display:flex;
@@ -641,24 +632,19 @@ a {
   transform: translateX(-50%);
 }
 
+/* Toasts nuevos */
 
-/* --- Toasts nuevos (carrito vacío) --- */
-/* Toast cuando el carrito está vacío y se pulsa COMPRAR */
 #carrito-vacio-compra.toast {
-  background-color: rgb(128, 255, 0); /* rojo */
+  background-color: rgb(128, 255, 0); 
   color: rgb(0, 0, 0);
   border: 1px solid rgb(0, 0, 0);
   border-radius: 8px;
 }
 
-/* Toast cuando el carrito está vacío y se pulsa VACIAR */
+
 #carrito-vacio-vaciar.toast {
-  background-color: #ffc107; /* amarillo */
+  background-color: #ffc107; 
   color: #212529;
   border: 1px solid #212529;
   border-radius: 8px;
 }
-
-
-
-
