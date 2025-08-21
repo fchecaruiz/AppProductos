@@ -65,7 +65,7 @@
     </ul>
     
     
-    <div class="carrito-container" th:if="${!esAdmin}">
+    <div class="carrito-container" th:if="${!esAdmin or true}">
         <h2>Tu Carrito <img src="https://img.icons8.com/material-outlined/75/000000/shopping-cart.png" alt="Icono de carrito de compras" class="icono-carrito"></h2>
         <div th:if="${carrito != null and not carrito.items.empty}">
             <ul>
@@ -172,8 +172,9 @@
     </script>
     
         <footer class="app-footer">
-        <p>&copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}"></span> Tu Tienda Online. Todos los derechos reservados.</p>
-    </footer>
+            <p>&copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}"></span> Tu Tienda Online. Todos los derechos reservados.</p>
+            
+        </footer>
     
     
 
