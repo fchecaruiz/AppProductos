@@ -188,8 +188,19 @@
     </script>
     
     <footer class="app-footer">
-        <p>&copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}"></span> Tu Tienda Online. Todos los derechos reservados.</p>
+         <p>&copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}"></span> Tu Tienda Online.</p>
+              <div class="footer-links">
+                 <a href="https://formacion.ipartek.com/" target="_blank" class="enlace-footer">Formación Ipartek</a>
+                 <a href="https://formacion.ipartek.com/contacto.asp" class="contacto-ipartek">Contacto</a>
+              </div>
+   </footer>
+    
+    <!--  <footer class="app-footer">
+        <p>&copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}"></span> Tu Tienda Online.</p>
         <a href="https://formacion.ipartek.com/" target="_blank" class="enlace-footer">Formación Ipartek</a>
+        <a href="mailto:fchecaruiz@gmail.com" class="enviarMail">Contacto</a>
+        
     </footer>
+    -->
 </body>
 </html>
