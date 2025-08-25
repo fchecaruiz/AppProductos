@@ -140,18 +140,35 @@ a {
 }
 
 /* carrito con fondo claro distinto al body para definición */
+/* Carrito: altura máxima y scroll interno */
 .carrito-container {
-    overflow-y: auto;
-    position: fixed;
-    top: 150px;
-    right: 12px;
-    width: 300px;
-    background: linear-gradient(180deg,#ffffff 0%, #f8fbff 100%);
-    border: 1px solid #e0e8f0;
-    padding: 18px;
-    border-radius: 12px;
-    box-shadow: 0 12px 30px rgba(15, 23, 32, 0.06);
-    z-index: 1000;
+  position: fixed;
+  height:auto;
+  top: var(--carrito-top, 150px);     /* se puede ajustar o sobreescribir desde JS */
+  right: 12px;
+  width: 300px;
+  max-height: calc(100vh - 200px);    /* fallback estático si no usas JS */
+  overflow-y: auto;
+  overscroll-behavior: contain;       /* evita que el scroll del carrito "se escape" al body */
+  -webkit-overflow-scrolling: touch;  /* scroll suave en iOS */
+  background: linear-gradient(180deg,#ffffff 0%, #f8fbff 100%);
+  border: 1px solid #e0e8f0;
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(15, 23, 32, 0.06);
+  z-index: 1000;
+}
+
+/* Si quieres que el header no tape el carrito en pantallas pequeñas,
+   en mobile normalmente el carrito está estático (según tu CSS actual),
+   por eso limitamos las reglas cuando está fixed. */
+@media (max-width: 768px) {
+.carrito-container {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+    width: 100%;
+  }
 }
 
 .icono-carrito {
@@ -459,7 +476,6 @@ a {
         font-size: 0.9rem;
     }
 
-  
     .header-container {
         display: flex;
         justify-content: center;   
@@ -482,12 +498,24 @@ a {
         display:none;
     }
 
-    /* Footer responsive */
+    /* Footer responsive - se apila verticalmente en móvil */
     .app-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+        padding: 20px 16px;
     }
+    
+    .app-footer .footer-left,
+    .app-footer .footer-center,
+    .app-footer .footer-right {
+    padding-right: 0;
+    }
+    
+    /* Orden en móvil: Contacto -> Copyright -> Ipartek */
+    .app-footer .footer-left { order: 1; }
+    .app-footer .footer-center { order: 2; }
+    .app-footer .footer-right { order: 3; }
 }
 
 /*---------------------------------------------*/
@@ -606,35 +634,47 @@ a {
     left: 20px;             
 }
 
-/* FOOTER - color distinto (gris azulado oscuro) */
+/* FOOTER - distribución: izquierda-centro-derecha */
 .app-footer {
   display: flex;
-  justify-content:space-around; 
-  align-items:center;     
+  align-items: center;
+  justify-content: space-between; /* reparte los 3 bloques equitativamente */
+  gap: 16px;
+  padding: 20px 28px;
+  width: 100%;
   background: linear-gradient(90deg,#0f1724 0%, #1b2633 100%);
   color: #dbe9ff;
-  padding: 28px 20px;
-  width: 100%;
-  gap: 20px;
   border-top: 1px solid rgba(255,255,255,0.03);
   box-shadow: 0 -8px 24px rgba(7, 22, 40, 0.06);
 }
 
-.app-footer p {
-  margin: 5px;
+/* Las 3 columnas ocupan el mismo espacio */
+.app-footer .footer-left,
+.app-footer .footer-center,
+.app-footer .footer-right {
+  text-align: right;
+  padding-right: 40px; /* ajusta este valor (20–56px) a tu gusto */
+}
+
+/* Alineaciones específicas */
+.app-footer .footer-left  { text-align: left;  }
+.app-footer .footer-center { text-align: center; }
+.app-footer .footer-right { text-align: right; }
+
+/* Estilo del texto del centro (copyright) */
+.app-footer .footer-center p {
+  margin: 0;
+  font-weight: 600;
   color: #cfe8ff;
+  font-size: 0.95rem;
 }
 
-.footer-links {
-  display: flex;
-  gap: 40px;
-  align-items: center;
-}
-
+/* Enlaces del footer */
 .enlace-footer {
-  color: #f59e0b; /* enlace en ámbar para contraste con footer oscuro */
+  color: #f59e0b; /* ámbar para contraste con footer oscuro */
   text-decoration: none;
   font-weight: 600;
+  transition: color 0.2s ease;
 }
 
 .enlace-footer:hover {
@@ -642,11 +682,16 @@ a {
   text-decoration: underline;
 }
 
-.contacto-ipartek{
-    color: #cfe8ff;
-    text-decoration: underline; 
-    padding: 0;
-    background-color: transparent;
+.contacto-ipartek {
+  color: #cfe8ff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.contacto-ipartek:hover {
+  text-decoration: underline;
+  color: #e6f3ff;
 }
 
 /* Toasts nuevos */
