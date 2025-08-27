@@ -8,7 +8,7 @@ html, body {
 }
 
 body {
-    /* fondo grisáceo claro y suave */
+    /* fondo grisáceo */
     background: linear-gradient(180deg, #f4f6f8 0%, #eef2f6 100%);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #0f1720;
@@ -23,7 +23,7 @@ body {
 }
 
 h1 {
-    color: #0b1220;
+    color: rgb(255, 255, 255);
     text-align: center;
     margin-bottom: 2rem;
 }
@@ -95,7 +95,7 @@ body.admin ul {
 
 
 li {
-    /* tarjeta clara con sutil sombra */
+    
     background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
     padding: 1rem;
     border-radius: 10px;
@@ -139,36 +139,23 @@ a {
     align-items: center;
 }
 
-/* carrito con fondo claro distinto al body para definición */
-/* Carrito: altura máxima y scroll interno */
+
 .carrito-container {
   position: fixed;
   height:auto;
-  top: var(--carrito-top, 150px);     /* se puede ajustar o sobreescribir desde JS */
+  top: var(--carrito-top, 150px);     
   right: 12px;
   width: 300px;
-  max-height: calc(100vh - 200px);    /* fallback estático si no usas JS */
+  max-height: calc(100vh - 200px);    
   overflow-y: auto;
-  overscroll-behavior: contain;       /* evita que el scroll del carrito "se escape" al body */
-  -webkit-overflow-scrolling: touch;  /* scroll suave en iOS */
+  overscroll-behavior: contain;       
+  -webkit-overflow-scrolling: touch; 
   background: linear-gradient(180deg,#ffffff 0%, #f8fbff 100%);
   border: 1px solid #e0e8f0;
   padding: 18px;
   border-radius: 12px;
   box-shadow: 0 12px 30px rgba(15, 23, 32, 0.06);
   z-index: 1000;
-}
-
-/* Si quieres que el header no tape el carrito en pantallas pequeñas,
-   en mobile normalmente el carrito está estático (según tu CSS actual),
-   por eso limitamos las reglas cuando está fixed. */
-@media (max-width: 768px) {
-.carrito-container {
-    position: static;
-    max-height: none;
-    overflow-y: visible;
-    width: 100%;
-  }
 }
 
 .icono-carrito {
@@ -193,7 +180,7 @@ a {
     color: #0f1720;
 }
 
-/* Estilos para el Toast de confirmación */
+/*Toast de confirmación */
 
 .toast {
     visibility: hidden;
@@ -246,7 +233,7 @@ a {
     display: none;
 }
 
-/*  página de login */
+/*login */
 
 .login-container {
     max-width: 420px;
@@ -300,7 +287,7 @@ a {
     filter: brightness(0.95);
 }
 
-/*  cabecera de botones --- */
+/*  cabecera de botones */
 .botones-header {
     position: fixed; 
     bottom: 50rem;
@@ -371,7 +358,7 @@ a {
     filter: brightness(0.9);
 }
 
-/* botón de 'Vaciar Carrito' con naranja suave */
+/* botón de 'Vaciar Carrito' con naranja */
 #btn-vaciar-carrito {
     background: linear-gradient(180deg,#ff9f0a,#ff7a00);
     color: #0f1720;
@@ -396,6 +383,13 @@ a {
 }
 
 @media (max-width: 768px) {
+    .carrito-container {
+        position: static;
+        max-height: none;
+        overflow-y: visible;
+        width: 100%;
+    }
+
     body {
         padding-bottom: 200px;
     }
@@ -427,7 +421,7 @@ a {
 
     .carrito-container {
         position: static;
-        width: 100%;
+        width: 95%;
         margin: 1rem 0;
         padding: 1rem;
         border: 1px solid #e0e8f0;
@@ -444,7 +438,7 @@ a {
         position: static;
         flex-direction: column;
         align-items: flex-start;
-        gap: 5px;
+        gap: 7px;
         margin-bottom: 1rem;
     }
 
@@ -486,10 +480,12 @@ a {
     .app-header {
         text-align: center;
         padding: 1rem;
+      
     }
 
     .app-header h1 {
         font-size: 1.2rem;
+        color: #ffffff;
     }
     
     .logo-tienda {
@@ -600,7 +596,7 @@ a {
 
 /* CABECERA HEADER*/
 
-/* header con color propio (azul elegante) */
+
 .app-header {
     width: 100%;
     background: linear-gradient(90deg,#0A84FF 0%, #0070D2 100%);
@@ -638,7 +634,7 @@ a {
 .app-footer {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* reparte los 3 bloques equitativamente */
+  justify-content: space-between; 
   gap: 16px;
   padding: 20px 28px;
   width: 100%;
@@ -648,15 +644,15 @@ a {
   box-shadow: 0 -8px 24px rgba(7, 22, 40, 0.06);
 }
 
-/* Las 3 columnas ocupan el mismo espacio */
+
 .app-footer .footer-left,
 .app-footer .footer-center,
 .app-footer .footer-right {
   text-align: right;
-  padding-right: 40px; /* ajusta este valor (20–56px) a tu gusto */
+  padding-right: 40px; 
 }
 
-/* Alineaciones específicas */
+
 .app-footer .footer-left  { text-align: left;  }
 .app-footer .footer-center { text-align: center; }
 .app-footer .footer-right { text-align: right; }
@@ -671,7 +667,7 @@ a {
 
 /* Enlaces del footer */
 .enlace-footer {
-  color: #f59e0b; /* ámbar para contraste con footer oscuro */
+  color: #f59e0b; 
   text-decoration: none;
   font-weight: 600;
   transition: color 0.2s ease;
